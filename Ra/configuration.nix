@@ -83,7 +83,9 @@
     description = "Nevis";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-    #  thunderbird
+            rustc
+            cargo
+            cmake
     ];
   };
 
