@@ -8,6 +8,7 @@ keys:
   - &hosts:
     - &Ra age1vx0kf8f6adynr2rv52awe97lnqypnv2mvc8qk4kp5nt2eqps3amsxdyy9m
     - &Anubis age17us57ckcre645hvt2gwld4grepw6zfuu6n2e5zdl7x3lfffkrcwst7gsgh
+    - &Thoth age19ss3kyup0ma8wsvzsjjm26fdxgrzahmz9jrj4hpk0q6sdn4d5gusu7ypt8
 creation_rules:
   - path_regex: secrets.yaml$
     key_groups:
@@ -15,5 +16,6 @@ creation_rules:
         - *nevis
         - *Ra
         - *Anubis
+        - *Thoth
 
 
