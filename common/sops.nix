@@ -14,16 +14,16 @@ sops.age = {
 };
 
 sops.secrets = {
-password = {};
+vpnacc = {owner = "nevis";};
 sshpub = {owner = "nevis";};
 serverIp = {owner = "nevis";};
 };
 
 environment.sessionVariables = {
-	dog = "moose";
+	dog = "moosa";
 	key = config.sops.secrets."sshpub".path;
 	key2 = "$(cat ${config.sops.secrets."sshpub".path})";
-	
+	b = "$(cat ${config.sops.secrets."vpnacc".path})";
 };
 environment.variables = {
 	key3 = "$(cat ${config.sops.secrets."sshpub".path})";

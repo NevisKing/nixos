@@ -34,12 +34,14 @@
                     ./common/ssh.nix
                     ./nvidia/drivers.nix
                     ./common/docker.nix
+                    ./common/jelly.nix
                     sops-nix.nixosModules.sops
                 ];
             };
             nixosConfigurations.Anubis = nixpkgs.lib.nixosSystem {
                 modules = [
                     ./Anubis/configuration.nix
+                    ./common/ssh.nix
                 ];
             };
         };

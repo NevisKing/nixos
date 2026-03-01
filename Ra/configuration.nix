@@ -22,8 +22,12 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
   # Enable networking
-  networking.networkmanager.enable = true;
-
+  networking.networkmanager = {
+    enable = true;
+    plugins = with pkgs; [
+      networkmanager-openvpn
+    ];
+  };
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
 
@@ -77,6 +81,16 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
+  services.openvpn.servers = {
+        testVpn = { 
+            autoStart = false;
+            config = '' 
+                config /home/nevis/.config/vpnconf/74.ovpn
+                auth-user-pass ${config.sops.secrets."vpnacc".path}
+            ''; };
+    };
+    environment.etc.openvpn.source = "${pkgs.update-resolv-conf}/libexec/openvpn";
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.nevis = {
     isNormalUser = true;
@@ -86,6 +100,7 @@
             rustc
             cargo
             cmake
+            discord
     ];
   };
 
@@ -109,6 +124,7 @@
      wl-clipboard
      mako
      pkgs.home-manager
+     openvpn
   ];
 
 
