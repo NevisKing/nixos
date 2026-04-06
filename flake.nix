@@ -4,10 +4,13 @@
     inputs = {
         nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
         sops-nix.url = "github:Mic92/sops-nix";
+        whisp-away.url = "github:madjinn/whisp-away";
         sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+        jambi.url = "github:guttermonk/jambi";
+        whisp-away.inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    outputs = { self, nixpkgs, sops-nix }@inputs: 
+    outputs = { self, nixpkgs, sops-nix , whisp-away, jambi}@inputs: 
         let
             pkgs = nixpkgs.legacyPackages.x86_64-linux;
         in
@@ -34,8 +37,10 @@
                     ./common/ssh.nix
                     ./nvidia/drivers.nix
                     ./common/docker.nix
-                    ./common/jelly.nix
+                    ./common/whisp.nix
+                    /home/nevis/git/opencode/flake.nix
                     sops-nix.nixosModules.sops
+                    whisp-away.nixosModules.nixos
                 ];
             };
             nixosConfigurations.Anubis = nixpkgs.lib.nixosSystem {

@@ -17,6 +17,7 @@ sops.secrets = {
 vpnacc = {owner = "nevis";};
 sshpub = {owner = "nevis";};
 serverIp = {owner = "nevis";};
+cloudflareCertloc = {owner = "nevis";};
 };
 
 environment.sessionVariables = {

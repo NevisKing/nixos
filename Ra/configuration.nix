@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports =
@@ -17,6 +17,7 @@
 
   networking.hostName = "Ra"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -46,6 +47,9 @@
     LC_TIME = "nl_NL.UTF-8";
   };
 
+    #services.ollama.enable = true;
+    #services.ollama.package = pkgs.ollama-cuda;
+    #services.open-webui.enable = true;
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
@@ -58,6 +62,7 @@
     layout = "us";
     variant = "";
   };
+
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -101,6 +106,8 @@
             cargo
             cmake
             discord
+            xdotool
+            xclip
     ];
   };
 
@@ -125,6 +132,11 @@
      mako
      pkgs.home-manager
      openvpn
+     vllm
+        #opencode
+     zed-editor-fhs
+     go
+     gopls
   ];
 
 
@@ -138,9 +150,9 @@
 
 
   # List services that you want to enable:
-
+    
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
+   networking.firewall.allowedTCPPorts = [3000];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
